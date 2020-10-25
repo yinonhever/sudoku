@@ -313,7 +313,7 @@ a {
   padding: 3rem 9vw 8rem;
   overflow: hidden;
   position: relative;
-  min-height: 700px; }
+  min-height: 750px; }
   @media only screen and (max-width: 600px) {
     .main {
       padding: 2rem 5vw 6rem;
