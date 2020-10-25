@@ -2,11 +2,14 @@ $margin-desktop: 1.5rem;
 $margin-mobile: 1rem;
 
 .board {
+  display: flex;
+  flex-direction: column;
   animation: fadeFromLeft 0.7s;
+  // The board's height is adjusted responsively using JS
 
   &__row {
     display: flex;
-    width: 100%;
+    height: calc(100% / 9);
 
     &:nth-child(3),
     &:nth-child(6) {
@@ -19,8 +22,8 @@ $margin-mobile: 1rem;
   }
 
   &__cell {
+    display: block;
     width: calc(100% / 9);
-    // The cell's height is adjusted responsively using JS
     text-align: center;
     font: inherit;
     font-size: 1.5rem;

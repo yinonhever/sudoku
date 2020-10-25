@@ -34,10 +34,16 @@ export const emptySudokuCells = (cells, level) => {
     return newCells;
 }
 
-// Rendering the game board's HTML elements to the page
-export const createBoardInterface = gameBoard => {
+// Creating the game board's inner HTML elements (rows and cells).
+// Responsively adjusting the board's height to be the same as the width.
+export const createBoardInterface = board => {
+    board.style.height = `${board.offsetWidth}px`;
+    window.addEventListener("resize", () => {
+        board.style.height = `${board.offsetWidth}px`;
+    })
+
     for (let i = 0; i < 9; i++) {
-        gameBoard.insertAdjacentHTML("beforeend", `<div class="board__row"></div>`);
+        board.insertAdjacentHTML("beforeend", `<div class="board__row"></div>`);
     }
 
     const boardRows = Array.from(document.querySelectorAll(".board__row"));
@@ -48,18 +54,6 @@ export const createBoardInterface = gameBoard => {
             `);
         }
     })
-
-    // Responsively adjusting the board cell's height to be the same as the width
-    const boardCells = Array.from(document.querySelectorAll(".board__cell"));
-    const adjustCellHeight = () => {
-        const width = boardCells[0].offsetWidth;
-        const height = width !== 0 ? width : 63;
-        boardCells.forEach(cell => {
-            cell.style.height = `${height}px`;
-        })
-    }
-    adjustCellHeight();
-    window.addEventListener("resize", adjustCellHeight);
 }
 
 // Filling the game board's cells with their initial values (if they have initial values).

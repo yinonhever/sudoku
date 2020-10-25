@@ -194,16 +194,19 @@ a {
   border-radius: 100px; }
 
 .board {
+  display: flex;
+  flex-direction: column;
   animation: fadeFromLeft 0.7s; }
   .board__row {
     display: flex;
-    width: 100%; }
+    height: calc(100% / 9); }
     .board__row:nth-child(3), .board__row:nth-child(6) {
       margin-bottom: 1.5rem; }
       @media only screen and (max-width: 600px) {
         .board__row:nth-child(3), .board__row:nth-child(6) {
           margin-bottom: 1rem; } }
   .board__cell {
+    display: block;
     width: calc(100% / 9);
     text-align: center;
     font: inherit;
