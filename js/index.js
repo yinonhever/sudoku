@@ -14,6 +14,7 @@ const users = [
     { name: "Yinon", password: "1234" },
     { name: "stranger", password: "1234" }
 ];
+
 // Getting the existing user scores from the local storage, if they exist
 const scores = JSON.parse(localStorage.getItem("scores")) || {};
 
@@ -42,14 +43,17 @@ const restartButton = document.getElementById("restart-button");
 
 const scoreBox = document.getElementById("score-box");
 const scoreCount = document.getElementById("score");
+const scoreBoxUsername = document.getElementById("scorebox-username");
 
 const logoutButton = document.getElementById("logout-button");
 
 // Checking if a user is already logged in when the page loads
+// If so, loading the level choice screen instead of the login screen
 loggedInUser = localStorage.getItem("currentUser");
 if (loggedInUser) {
     displayPageElements([levelChoiceScreen, logoutButton, scoreBox]);
     usernameTitle.innerText = loggedInUser;
+    scoreBoxUsername.innerText = loggedInUser;
 
     // Checking if the user already has a score in the local storage
     // If not, setting the score to 0
@@ -73,6 +77,7 @@ loginForm.addEventListener("submit", event => {
         loginForm.classList.remove("error");
         loginForm.reset();
         usernameTitle.innerText = name;
+        scoreBoxUsername.innerText = name;
 
         loggedInUser = name;
         localStorage.setItem("currentUser", name);

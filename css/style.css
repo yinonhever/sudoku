@@ -278,7 +278,6 @@ a {
   top: 50%;
   left: 2rem;
   min-width: 12rem;
-  padding: 1.5rem 2rem 1rem;
   box-shadow: rgba(62, 57, 107, 0.3) 0px 6px 16px 0px;
   background-color: #fff;
   border-radius: 0.4rem;
@@ -286,6 +285,8 @@ a {
   opacity: 0;
   transform: translate(-100%, -50%);
   transition: all 0.6s;
+  display: flex;
+  flex-direction: column;
   z-index: 99999; }
   @media only screen and (max-width: 900px) {
     .score-box {
@@ -303,18 +304,44 @@ a {
     @media only screen and (max-width: 900px) {
       .score-box.display {
         transform: translateX(0); } }
+  .score-box__main {
+    padding: 1.5rem 2rem 0.8rem; }
+    @media only screen and (max-width: 600px) {
+      .score-box__main {
+        padding: 1.3rem 2rem 0.7rem; } }
   .score-box__title {
     font-weight: 700;
-    margin-bottom: 1.5rem; }
+    margin-bottom: 1.5rem;
+    font-size: 1.6rem; }
     @media only screen and (max-width: 600px) {
       .score-box__title {
         font-size: 1.4rem; } }
   .score-box__score {
     color: #1d89ff;
-    font-size: 4rem; }
+    font-size: 4.5rem;
+    font-weight: 400; }
     @media only screen and (max-width: 600px) {
       .score-box__score {
         font-size: 3.5rem; } }
+  .score-box__username {
+    background-color: #041464;
+    color: #fff;
+    font-weight: 600;
+    font-size: 1.5rem;
+    padding: 1.2rem 2rem 1rem;
+    border-radius: 0 0 0.4rem 0.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center; }
+    @media only screen and (max-width: 600px) {
+      .score-box__username {
+        font-size: 1.2rem; } }
+    .score-box__username i {
+      margin-right: 0.75rem;
+      font-size: 1.3rem; }
+      @media only screen and (max-width: 600px) {
+        .score-box__username i {
+          font-size: 1rem; } }
 
 .main {
   padding: 3rem 9vw 8rem;

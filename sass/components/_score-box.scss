@@ -3,7 +3,6 @@
   top: 50%;
   left: 2rem;
   min-width: 12rem;
-  padding: 1.5rem 2rem 1rem;
   box-shadow: $bshadow;
   background-color: #fff;
   border-radius: 0.4rem;
@@ -11,6 +10,8 @@
   opacity: 0;
   transform: translate(-100%, -50%);
   transition: all 0.6s;
+  display: flex;
+  flex-direction: column;
   z-index: 99999;
 
   @include respond(tablet) {
@@ -34,9 +35,18 @@
     }
   }
 
+  &__main {
+    padding: 1.5rem 2rem 0.8rem;
+
+    @include respond(mobile) {
+      padding: 1.3rem 2rem 0.7rem;
+    }
+  }
+
   &__title {
     font-weight: 700;
     margin-bottom: 1.5rem;
+    font-size: 1.6rem;
 
     @include respond(mobile) {
       font-size: 1.4rem;
@@ -45,10 +55,36 @@
 
   &__score {
     color: $color-azure;
-    font-size: 4rem;
+    font-size: 4.5rem;
+    font-weight: 400;
 
     @include respond(mobile) {
       font-size: 3.5rem;
+    }
+  }
+
+  &__username {
+    background-color: $color-blue;
+    color: #fff;
+    font-weight: 600;
+    font-size: 1.5rem;
+    padding: 1.2rem 2rem 1rem;
+    border-radius: 0 0 0.4rem 0.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @include respond(mobile) {
+      font-size: 1.2rem;
+    }
+
+    i {
+      margin-right: 0.75rem;
+      font-size: 1.3rem;
+
+      @include respond(mobile) {
+        font-size: 1rem;
+      }
     }
   }
 }
