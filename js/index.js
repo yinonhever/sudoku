@@ -45,10 +45,9 @@ const scoreCount = document.getElementById("score");
 
 const logoutButton = document.getElementById("logout-button");
 
-// Checking if a user is already logged in
+// Checking if a user is already logged in when the page loads
 loggedInUser = localStorage.getItem("currentUser");
 if (loggedInUser) {
-    removePageElements(loginScreen);
     displayPageElements([levelChoiceScreen, logoutButton, scoreBox]);
     usernameTitle.innerText = loggedInUser;
 
@@ -56,6 +55,9 @@ if (loggedInUser) {
     // If not, setting the score to 0
     score = scores[loggedInUser] || 0;
     scoreCount.innerText = score;
+}
+else {
+    displayPageElements(loginScreen);
 }
 
 // Validating the login form when submitted
