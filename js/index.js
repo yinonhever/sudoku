@@ -21,7 +21,7 @@ const scores = JSON.parse(localStorage.getItem("scores")) || {};
 // Initial variables
 let targetBoard = randomSudoku();
 let targetCells = sudokuCells(targetBoard);
-let loggedInUser, score, level, interfaceCells, initialUserCells;
+let loggedInUser, score, level, interfaceCells, initialGameCells;
 
 // Page elements
 const loginScreen = document.getElementById("login");
@@ -108,14 +108,14 @@ levelButtons.forEach(levelButton => {
         }
 
         // Filling the game board's cells with their initial values
-        initialUserCells = emptySudokuCells(targetCells, level);
-        initializeBoardCells(interfaceCells, initialUserCells);
+        initialGameCells = emptySudokuCells(targetCells, level);
+        initializeBoardCells(interfaceCells, initialGameCells);
     })
 })
 
 // Resetting the board and the game when reset button is clicked
 resetButton.addEventListener("click", () => {
-    initializeBoardCells(interfaceCells, initialUserCells);
+    initializeBoardCells(interfaceCells, initialGameCells);
 })
 
 // Checking the user's result when finish button is clicked

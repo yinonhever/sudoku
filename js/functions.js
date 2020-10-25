@@ -61,15 +61,15 @@ export const createBoardInterface = board => {
 
 // Filling the game board's cells with their initial values (if they have initial values).
 // Modifying each cell's appearance according to whether it has a value or not.
-export const initializeBoardCells = (interfaceCells, userCells) => {
+export const initializeBoardCells = (interfaceCells, gameCells) => {
     interfaceCells.forEach((interfaceCell, index) => {
-        if (userCells[index] === 0) {
+        if (gameCells[index] === 0) {
             interfaceCell.value = "";
             interfaceCell.removeAttribute("readonly");
             interfaceCell.classList.remove("board__cell--prefilled");
         }
         else {
-            interfaceCell.value = userCells[index];
+            interfaceCell.value = gameCells[index];
             interfaceCell.setAttribute("readonly", "true");
             interfaceCell.classList.add("board__cell--prefilled");
         }
