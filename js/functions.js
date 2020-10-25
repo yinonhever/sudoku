@@ -37,10 +37,13 @@ export const emptySudokuCells = (cells, level) => {
 // Creating the game board's inner HTML elements (rows and cells).
 // Responsively adjusting the board's height to be the same as the width.
 export const createBoardInterface = board => {
-    board.style.height = `${board.offsetWidth}px`;
-    window.addEventListener("resize", () => {
-        board.style.height = `${board.offsetWidth}px`;
-    })
+    const adjustHeight = () => {
+        const height = board.offsetWidth > 0 ? board.offsetWidth :
+            window.innerWidth > 600 ? 600 : 350;
+        board.style.height = `${height}px`;
+    }
+    adjustHeight();
+    window.addEventListener("resize", adjustHeight)
 
     for (let i = 0; i < 9; i++) {
         board.insertAdjacentHTML("beforeend", `<div class="board__row"></div>`);
