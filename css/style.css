@@ -224,8 +224,7 @@ a {
         font-size: 1.1rem; } }
     .board__cell--prefilled {
       cursor: initial;
-      background-color: #c9e4ff;
-      border: 1px solid rgba(0, 0, 0, 0.3) !important; }
+      background-color: #c9e4ff; }
     .board__cell:nth-child(3), .board__cell:nth-child(6) {
       margin-right: 1.5rem; }
       @media only screen and (max-width: 600px) {
@@ -392,6 +391,9 @@ a {
 
 .game__heading {
   margin-bottom: 5rem; }
+  @media only screen and (max-width: 600px) {
+    .game__heading {
+      margin-bottom: 4rem; } }
 
 .game__buttons {
   margin-top: 5rem;

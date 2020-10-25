@@ -1,3 +1,4 @@
+// GENERAL LAYOUT
 .main {
   padding: 3rem $padding-side-desktop 8rem;
   overflow: hidden;
@@ -16,12 +17,14 @@
   margin: auto;
 }
 
+// LOGIN SCREEN
 .login {
   &__container {
     max-width: 50rem;
   }
 }
 
+// LEVEL CHOICE SCREEN
 .level-choice {
   &__container {
     max-width: 55rem;
@@ -56,6 +59,7 @@
   }
 }
 
+// GAME BOARD SCREEN
 .game {
   &__container {
     max-width: 60rem;
@@ -63,6 +67,10 @@
 
   &__heading {
     margin-bottom: 5rem;
+
+    @include respond(mobile) {
+      margin-bottom: 4rem;
+    }
   }
 
   &__buttons {
