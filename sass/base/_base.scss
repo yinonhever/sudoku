@@ -1,0 +1,25 @@
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%; // 1rem = 10px
+}
+
+body {
+  background-image: url(../images/Curly-Curtaintop.svg);
+  background-repeat: repeat-x;
+  background-position: top center;
+}
+
+section {
+  display: none;
+
+  &.display {
+    display: block;
+  }
+}

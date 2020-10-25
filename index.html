@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sudoku Game</title>
+    <link rel="icon" href="./images/favicon.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&family=Spartan:wght@400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/5225b7dab1.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Styles from the bttn library -->
+    <link rel="stylesheet" href="./css/bttn.min.css" />
+    <!-- The compiled CSS file from SCSS -->
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <main class="main">
+      <!-- Site logo -->
+      <a href="/">
+        <h1 class="heading heading--primary">Sudoku</h1>
+      </a>
+
+      <!-- Login screen -->
+      <section class="login display" id="login">
+        <div class="container login__container">
+          <h2 class="login__heading heading heading--secondary">
+            Log in to start the game
+          </h2>
+          <form class="form">
+            <input
+              class="form__input"
+              type="text"
+              name="name"
+              placeholder="Username"
+            />
+            <input
+              class="form__input"
+              type="password"
+              name="password"
+              placeholder="Password"
+            />
+            <button type="submit" class="button bttn bttn-primary bttn-fill">
+              Enter
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <!-- Level choice screen -->
+      <section class="level-choice" id="level-choice">
+        <div class="container level-choice__container">
+          <h2 class="level-choice__heading heading heading--secondary">
+            Hello, <span id="username"></span>
+          </h2>
+          <div class="level-choice__content">
+            <h3 class="level-choice__subheading">Pick a level:</h3>
+            <div class="level-choice__buttons">
+              <button class="button bttn bttn-primary bttn-pill button--level">
+                1
+              </button>
+              <button class="button bttn bttn-primary bttn-pill button--level">
+                2
+              </button>
+              <button class="button bttn bttn-primary bttn-pill button--level">
+                3
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Game screen with the sudoku board -->
+      <section id="game">
+        <div class="container game__container">
+          <h2 class="game__heading heading heading--secondary">
+            Level: <span id="level"></span>
+          </h2>
+          <div class="board">
+            <!-- The board's inner elements are created with JS -->
+          </div>
+          <div class="game__buttons">
+            <button
+              class="button bttn bttn-primary bttn-fill"
+              id="finish-button"
+            >
+              Finish
+            </button>
+            <button
+              class="button bttn bttn-primary bttn-unite"
+              id="reset-button"
+            >
+              Again
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Result modal shown when the game is finished -->
+      <div class="modal" id="result">
+        <div class="modal__content">
+          <h2 class="modal__heading heading--secondary" id="result-title"></h2>
+          <button
+            class="button bttn bttn-primary bttn-unite modal__button"
+            id="restart-button"
+          >
+            Play Again
+          </button>
+        </div>
+      </div>
+
+      <!-- Score box -->
+      <div class="score-box" id="score-box">
+        <h4 class="score-box__title">Score</h4>
+        <span class="score-box__score" id="score"></span>
+      </div>
+
+      <!-- Logout button -->
+      <button class="button button--logout" id="logout-button">
+        <i class="fas fa-sign-out-alt"></i>
+      </button>
+    </main>
+
+    <!-- Site footer -->
+    <footer class="footer">
+      <div class="footer__container">
+        <div class="footer__line"></div>
+        <p class="footer__text">Copyright &copy; 2020 Yinon Hever</p>
+        <div class="footer__line"></div>
+      </div>
+    </footer>
+
+    <script type="module" src="./js/index.js"></script>
+  </body>
+</html>

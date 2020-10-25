@@ -1,0 +1,51 @@
+body {
+  font-family: "Spartan", sans-serif;
+  font-size: 1.6rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  color: $color-blue;
+  font-weight: 900;
+}
+
+.heading {
+  &--primary {
+    font-family: "Pacifico", cursive;
+    font-size: 7rem;
+    color: $color-blue;
+    margin-top: 17rem;
+    margin-bottom: 5rem;
+    display: inline-block;
+
+    @include respond(mobile) {
+      margin-top: 14rem;
+      margin-bottom: 4rem;
+      font-size: 5rem;
+    }
+  }
+
+  &--secondary {
+    font-size: 3.5rem;
+    letter-spacing: -0.9px;
+    margin-bottom: 5rem;
+    box-shadow: $bshadow;
+    border-radius: 100px;
+    padding: 2rem 1.5rem 1.5rem;
+    animation: fadeFromRight 0.7s;
+
+    @include respond(mobile) {
+      font-size: 2.7rem;
+      margin-bottom: 4rem;
+    }
+  }
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}

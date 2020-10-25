@@ -1,0 +1,51 @@
+$margin-desktop: 1.5rem;
+$margin-mobile: 1rem;
+
+.board {
+  animation: fadeFromLeft 0.7s;
+
+  &__row {
+    display: flex;
+    width: 100%;
+
+    &:nth-child(3),
+    &:nth-child(6) {
+      margin-bottom: $margin-desktop;
+
+      @include respond(mobile) {
+        margin-bottom: $margin-mobile;
+      }
+    }
+  }
+
+  &__cell {
+    width: calc(100% / 9);
+    // The cell's height is adjusted responsively using JS
+    text-align: center;
+    font: inherit;
+    font-size: 1.5rem;
+    font-weight: 500;
+    border: 1px solid rgba(#000, 0.3);
+    outline: none;
+    background-color: #fff;
+
+    @include respond(mobile) {
+      font-size: 1.1rem;
+    }
+
+    &--prefilled {
+      cursor: initial;
+      background-color: $color-azure-light;
+      border: 1px solid rgba(#000, 0.3) !important;
+    }
+
+    &:nth-child(3),
+    &:nth-child(6) {
+      margin-right: $margin-desktop;
+
+      @include respond(mobile) {
+        margin-right: $margin-mobile;
+      }
+    }
+  }
+}

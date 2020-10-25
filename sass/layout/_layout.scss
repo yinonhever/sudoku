@@ -1,0 +1,86 @@
+.main {
+  padding: 3rem $padding-side-desktop 8rem;
+  overflow: hidden;
+  position: relative;
+
+  @include respond(mobile) {
+    padding: 2rem $padding-side-mobile 6rem;
+  }
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+
+.login {
+  &__container {
+    max-width: 50rem;
+  }
+}
+
+.level-choice {
+  &__container {
+    max-width: 55rem;
+  }
+
+  &__heading {
+    margin-bottom: 2.5rem;
+  }
+
+  &__content {
+    margin-top: 2rem;
+    background-color: rgba($color-azure-light, 0.6);
+    padding: 3rem;
+    animation: fadeFromLeft 0.7s;
+  }
+
+  &__subheading {
+    font-size: 2.8rem;
+    font-weight: 500;
+    margin-bottom: 4rem;
+
+    @include respond(mobile) {
+      font-size: 2.3rem;
+    }
+  }
+
+  &__buttons {
+    display: flex;
+    justify-content: space-between;
+    max-width: 30rem;
+    margin: auto;
+  }
+}
+
+.game {
+  &__container {
+    max-width: 60rem;
+  }
+
+  &__heading {
+    margin-bottom: 5rem;
+  }
+
+  &__buttons {
+    margin-top: 5rem;
+    display: flex;
+    justify-content: space-between;
+    animation: fadeFromRight 0.7s;
+
+    @include respond(mobile) {
+      margin-top: 3rem;
+    }
+
+    .button {
+      width: 45%;
+      padding-left: 0;
+      padding-right: 0;
+
+      @include respond(mobile) {
+        width: 48%;
+      }
+    }
+  }
+}

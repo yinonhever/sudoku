@@ -1,0 +1,54 @@
+.score-box {
+  position: fixed;
+  top: 50%;
+  left: 2rem;
+  min-width: 12rem;
+  padding: 1.5rem 2rem 1rem;
+  box-shadow: $bshadow;
+  background-color: #fff;
+  border-radius: 0.4rem;
+  visibility: hidden;
+  opacity: 0;
+  transform: translate(-100%, -50%);
+  transition: all 0.6s;
+  z-index: 99999;
+
+  @include respond(tablet) {
+    top: 2rem;
+    transform: translateX(-100%);
+  }
+
+  @include respond(mobile) {
+    top: 1.5rem;
+    left: 1.5rem;
+    min-width: 10rem;
+  }
+
+  &.display {
+    visibility: visible;
+    opacity: 1;
+    transform: translate(0, -50%);
+
+    @include respond(tablet) {
+      transform: translateX(0);
+    }
+  }
+
+  &__title {
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+
+    @include respond(mobile) {
+      font-size: 1.4rem;
+    }
+  }
+
+  &__score {
+    color: $color-azure;
+    font-size: 4rem;
+
+    @include respond(mobile) {
+      font-size: 3.5rem;
+    }
+  }
+}

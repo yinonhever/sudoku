@@ -1,0 +1,41 @@
+.footer {
+  background-color: $color-blue-2;
+  padding: 5rem $padding-side-mobile 4rem;
+
+  @include respond(mobile) {
+    padding: 4rem $padding-side-mobile;
+  }
+
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 100rem;
+    margin: auto;
+  }
+
+  &__text {
+    color: rgba(#fff, 0.7);
+    font-size: 1.5rem;
+    margin: 0 7rem;
+
+    @include respond(tablet) {
+      margin: 0 4rem;
+    }
+
+    @include respond(mobile) {
+      font-size: 1.3rem;
+      margin: auto;
+    }
+  }
+
+  &__line {
+    height: 0.4rem;
+    background-color: $color-blue;
+    flex: 1;
+
+    @include respond(mobile) {
+      display: none;
+    }
+  }
+}

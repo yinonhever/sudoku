@@ -1,0 +1,60 @@
+.form {
+  width: 100%;
+  margin: auto;
+  padding: 3rem;
+  border-radius: 0.8rem;
+  box-shadow: $bshadow;
+  background-color: $color-azure-light;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  animation: fadeFromLeft 0.7s;
+
+  @include respond(mobile) {
+    padding: 3rem 2rem;
+  }
+
+  &::after {
+    content: "Invalid username or password";
+    position: absolute;
+    top: calc(100% + 2rem);
+    left: 50%;
+    transform: translateX(-50rem);
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: $color-error;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.5s;
+  }
+
+  &.error::after {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%);
+  }
+
+  &__input {
+    font: inherit;
+    font-size: 1.7rem;
+    border: 2px solid transparent;
+    outline: none;
+    padding: 1.5rem;
+    transition: border-color 0.5s;
+    display: block;
+    margin-bottom: 1.5rem;
+    text-align: center;
+
+    @include respond(mobile) {
+      font-size: 1.4rem;
+    }
+
+    &:last-of-type {
+      margin-bottom: 2.5rem;
+    }
+
+    &:focus {
+      border-color: $color-azure;
+    }
+  }
+}

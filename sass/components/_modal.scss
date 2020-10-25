@@ -1,0 +1,51 @@
+.modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba($color-blue, 0.3);
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.5s;
+  z-index: 999;
+
+  &.display {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  &__content {
+    background-color: #fff;
+    width: calc(100% - 2 * #{$padding-side-mobile});
+    max-width: 50rem;
+    padding: 3rem 3rem 5rem;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: all 0.5s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: $bshadow;
+    border-radius: 0.4rem;
+
+    @include respond(mobile) {
+      padding: 1.5rem 2rem 3.5rem;
+    }
+  }
+
+  &.display &__content {
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  &__heading {
+    box-shadow: none;
+    margin-bottom: 2rem;
+
+    @include respond(mobile) {
+      margin-bottom: 1rem;
+    }
+  }
+}
