@@ -22,9 +22,27 @@ let targetBoard = randomSudoku();
 let targetCells = sudokuCells(targetBoard);
 let loggedInUser, score, level, interfaceCells, initialUserCells;
 
+// Page elements
 const loginScreen = document.getElementById("login");
+const loginForm = document.querySelector("#login .form");
+
 const levelChoiceScreen = document.getElementById("level-choice");
+const usernameTitle = document.getElementById("username");
+const levelButtons = Array.from(document.querySelectorAll(".button--level"));
+
+const gameScreen = document.getElementById("game");
+const gameBoard = document.querySelector(".board");
+const levelTitle = document.getElementById("level");
+const finishButton = document.getElementById("finish-button");
+const resetButton = document.getElementById("reset-button");
+
+const resultModal = document.getElementById("result");
+const resultTitle = document.getElementById("result-title");
+const restartButton = document.getElementById("restart-button");
+
 const scoreBox = document.getElementById("score-box");
+const scoreCount = document.getElementById("score");
+
 const logoutButton = document.getElementById("logout-button");
 
 // Checking if a user is already logged in when the page loads
@@ -41,31 +59,6 @@ if (loggedInUser) {
 else {
     displayPageElements(loginScreen);
 }
-
-// Page elements
-
-const loginForm = document.querySelector("#login .form");
-
-
-const usernameTitle = document.getElementById("username");
-const levelButtons = Array.from(document.querySelectorAll(".button--level"));
-
-const gameScreen = document.getElementById("game");
-const gameBoard = document.querySelector(".board");
-const levelTitle = document.getElementById("level");
-const finishButton = document.getElementById("finish-button");
-const resetButton = document.getElementById("reset-button");
-
-const resultModal = document.getElementById("result");
-const resultTitle = document.getElementById("result-title");
-const restartButton = document.getElementById("restart-button");
-
-
-const scoreCount = document.getElementById("score");
-
-
-
-
 
 // Validating the login form when submitted
 // If success, logging the user in and saving the user to the local storage

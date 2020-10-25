@@ -312,10 +312,12 @@ a {
 .main {
   padding: 3rem 9vw 8rem;
   overflow: hidden;
-  position: relative; }
+  position: relative;
+  min-height: 700px; }
   @media only screen and (max-width: 600px) {
     .main {
-      padding: 2rem 5vw 6rem; } }
+      padding: 2rem 5vw 6rem;
+      min-height: 650px; } }
 
 .container {
   display: flex;
