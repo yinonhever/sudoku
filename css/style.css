@@ -196,7 +196,11 @@ a {
 .board {
   display: flex;
   flex-direction: column;
-  animation: fadeFromLeft 0.7s; }
+  animation: fadeFromLeft 0.7s;
+  height: 60rem; }
+  @media only screen and (max-width: 700px) {
+    .board {
+      height: 90vw; } }
   .board__row {
     display: flex;
     height: calc(100% / 9); }

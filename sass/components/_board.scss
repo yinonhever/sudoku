@@ -5,7 +5,13 @@ $margin-mobile: 1rem;
   display: flex;
   flex-direction: column;
   animation: fadeFromLeft 0.7s;
-  // The board's height is adjusted responsively using JS
+
+  // Initial height values set as a fallback
+  // The actual height is adjusted responsively using JS, to be the same as the width
+  height: 60rem;
+  @include respond(mobile-land) {
+    height: 90vw;
+  }
 
   &__row {
     display: flex;
