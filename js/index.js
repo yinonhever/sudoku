@@ -152,4 +152,6 @@ logoutButton.addEventListener("click", () => {
     displayPageElements(loginScreen);
 
     localStorage.removeItem("currentUser");
+    targetBoard = randomSudoku();
+    targetCells = sudokuCells(targetBoard);
 })

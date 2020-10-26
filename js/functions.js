@@ -20,7 +20,7 @@ export const sudokuCells = sudoku => {
 // Randomally emptying some of the sudoku's board cells, according to the selected level.
 // 21 random cells are emptied in level 1, 41 in level 2, and 60 in level 3.
 export const emptySudokuCells = (cells, level) => {
-    let newCells = [...cells];
+    const newCells = [...cells];
     const cellsToEmpty = level === 1 ? 21 : level === 2 ? 41 : 60;
 
     for (let i = 0; i < cellsToEmpty; i++) {
