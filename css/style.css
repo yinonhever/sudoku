@@ -11,12 +11,24 @@ html {
 body {
   background-image: url(../images/Curly-Curtaintop.svg);
   background-repeat: repeat-x;
-  background-position: top center; }
+  background-position: top center;
+  position: relative; }
 
 section {
   display: none; }
   section.display {
     display: block; }
+
+noscript {
+  position: absolute;
+  width: 100%;
+  padding: 0 5vw;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  font-weight: 600;
+  font-size: 1.8rem;
+  color: #e11584; }
 
 body {
   font-family: "Spartan", sans-serif;
