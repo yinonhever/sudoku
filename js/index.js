@@ -103,8 +103,7 @@ levelButtons.forEach(levelButton => {
 
         // Creating the game board's inner elements (if they haven't been created yet)
         if (!interfaceCells) {
-            createBoardInterface(gameBoard);
-            interfaceCells = Array.from(document.querySelectorAll(".board__cell"));
+            interfaceCells = createBoardInterface(gameBoard);
         }
 
         // Filling the game board's cells with their initial values

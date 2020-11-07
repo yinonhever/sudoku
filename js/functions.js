@@ -57,6 +57,8 @@ export const createBoardInterface = board => {
             `);
         }
     })
+
+    return Array.from(document.querySelectorAll(".board__cell"));
 }
 
 // Filling the game board's cells with their initial values (if they have initial values).
