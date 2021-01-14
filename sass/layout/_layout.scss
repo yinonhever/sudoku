@@ -22,6 +22,17 @@
   &__container {
     max-width: 50rem;
   }
+
+  &__switch {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: fadeFromRight 0.7s;
+
+    .button {
+      margin-top: 2rem;
+    }
+  }
 }
 
 // LEVEL CHOICE SCREEN

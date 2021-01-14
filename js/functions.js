@@ -44,6 +44,9 @@ export const createBoardInterface = board => {
     }
     adjustHeight();
     window.addEventListener("resize", adjustHeight);
+    Array.from(document.querySelectorAll(".button--level")).forEach(levelButton => {
+        levelButton.addEventListener("click", adjustHeight);
+    })
 
     for (let i = 0; i < 9; i++) {
         board.insertAdjacentHTML("beforeend", `<div class="board__row"></div>`);

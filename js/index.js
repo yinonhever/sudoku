@@ -8,16 +8,6 @@ import {
     removePageElements
 } from "./functions.js";
 
-// The users that can log into the app
-const users = [
-    { name: "abcd", password: "1234" },
-    { name: "Yinon", password: "1234" },
-    { name: "stranger", password: "1234" }
-];
-
-// Getting the existing user scores from the local storage, if they exist
-const scores = JSON.parse(localStorage.getItem("scores")) || {};
-
 // Initial variables
 let targetBoard = randomSudoku();
 let targetCells = sudokuCells(targetBoard);
@@ -26,6 +16,11 @@ let loggedInUser, score, level, interfaceCells, initialGameCells;
 // Page elements
 const loginScreen = document.getElementById("login");
 const loginForm = document.querySelector("#login .form");
+const signupScreen = document.getElementById("signup");
+const signupForm = document.querySelector("#signup .form");
+const signupSwitch = document.getElementById("signup-switch");
+const loginSwitch = document.getElementById("login-switch");
+const spinner = document.querySelector(".spinner");
 
 const levelChoiceScreen = document.getElementById("level-choice");
 const usernameTitle = document.getElementById("username");
@@ -49,46 +44,141 @@ const logoutButton = document.getElementById("logout-button");
 
 // Checking if a user is already logged in when the page loads
 // If so, loading the level choice screen instead of the login screen
-loggedInUser = localStorage.getItem("currentUser");
-if (loggedInUser) {
-    displayPageElements([levelChoiceScreen, logoutButton, scoreBox]);
-    usernameTitle.innerText = loggedInUser;
-    scoreBoxUsername.innerText = loggedInUser;
+loggedInUser = JSON.parse(localStorage.getItem("currentUser"));
+const expired = loggedInUser && new Date(loggedInUser.expirationDate) <= new Date();
 
-    // Checking if the user already has a score in the local storage
-    // If not, setting the score to 0
-    score = scores[loggedInUser] || 0;
-    scoreCount.innerText = score;
+if (loggedInUser && !expired) {
+    displayPageElements([levelChoiceScreen, logoutButton, scoreBox]);
+    usernameTitle.innerText = loggedInUser.name;
+    scoreBoxUsername.innerText = loggedInUser.name;
+
+    score = loggedInUser.score;
+    scoreCount.innerText = loggedInUser.score;
 }
 else {
     displayPageElements(loginScreen);
+    localStorage.removeItem("currentUser");
 }
+
+// Switching between login and signup screens
+signupSwitch.addEventListener("click", () => {
+    removePageElements(loginScreen);
+    loginForm.classList.remove("error");
+    loginForm.reset();
+    displayPageElements(signupScreen);
+})
+
+loginSwitch.addEventListener("click", () => {
+    removePageElements(signupScreen);
+    signupForm.classList.remove("error");
+    signupForm.classList.remove("fail");
+    signupForm.reset();
+    displayPageElements(loginScreen);
+})
+
+// Registering a user when signup form is submitted
+signupForm.addEventListener("submit", async event => {
+    event.preventDefault();
+    const {
+        name: { value: name },
+        email: { value: email },
+        password: { value: password },
+        confirmPassword: { value: confirmPassword }
+    } = signupForm;
+
+    if (password !== confirmPassword) {
+        signupForm.classList.add("error");
+        signupForm.classList.remove("fail");
+    }
+    else {
+        signupForm.classList.remove("error");
+        signupForm.classList.remove("fail");
+        displayPageElements(spinner);
+
+        try {
+            const authRes = await axios.post("https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDSDS_F7tUc8QEbBwy-HiHu8Wy1Su3adQw", {
+                email: email,
+                password: password,
+                returnSecureToken: true
+            });
+            const profileRes = await axios.post(`https://sudoku-6c11e.firebaseio.com/profiles.json?auth=${authRes.data.idToken}`,
+                { name: name, email: email, score: 0 }
+            );
+
+            removePageElements([spinner, signupScreen]);
+            displayPageElements([levelChoiceScreen, logoutButton, scoreBox]);
+            signupForm.reset();
+
+            usernameTitle.innerText = name;
+            scoreBoxUsername.innerText = name;
+            score = 0;
+            scoreCount.innerText = 0;
+
+            loggedInUser = {
+                id: profileRes.data.name,
+                name: name,
+                score: 0,
+                idToken: authRes.data.idToken
+            };
+
+            localStorage.setItem("currentUser", JSON.stringify({
+                ...loggedInUser,
+                expirationDate: new Date(new Date().getTime() + authRes.data.expiresIn * 1000)
+            }));
+        }
+        catch {
+            removePageElements(spinner);
+            signupForm.classList.add("fail");
+        }
+    }
+})
 
 // Validating the login form when submitted
 // If success, logging the user in and saving the user to the local storage
-loginForm.addEventListener("submit", event => {
+loginForm.addEventListener("submit", async event => {
     event.preventDefault();
-    const { name: { value: name }, password: { value: password } } = loginForm;
-    const matchingUser = users.find(user => user.name === name && user.password === password);
+    const { email: { value: email }, password: { value: password } } = loginForm;
+    loginForm.classList.remove("error");
+    displayPageElements(spinner);
 
-    if (matchingUser) {
-        removePageElements(loginScreen);
-        displayPageElements([levelChoiceScreen, logoutButton, scoreBox]);
-        loginForm.classList.remove("error");
+    try {
+        const authRes = await axios.post("https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDSDS_F7tUc8QEbBwy-HiHu8Wy1Su3adQw", {
+            email: email,
+            password: password,
+            returnSecureToken: true
+        });
+        const profileRes = await axios.get("https://sudoku-6c11e.firebaseio.com/profiles.json");
+        const profiles = [];
+        for (let key in profileRes.data) {
+            profiles.push({ id: key, ...profileRes.data[key] });
+        }
+        const matchingUser = profiles.find(user => user.email === email);
+        if (!matchingUser) throw new Error();
+
         loginForm.reset();
-        usernameTitle.innerText = name;
-        scoreBoxUsername.innerText = name;
+        removePageElements([spinner, loginScreen]);
+        displayPageElements([levelChoiceScreen, logoutButton, scoreBox]);
 
-        loggedInUser = name;
-        localStorage.setItem("currentUser", name);
-
-        // Checking if the user already has a score in the local storage
-        // If not, setting the score to 0
-        score = scores[name] || 0;
+        usernameTitle.innerText = matchingUser.name;
+        scoreBoxUsername.innerText = matchingUser.name;
+        score = matchingUser.score;
         scoreCount.innerText = score;
+
+        loggedInUser = {
+            id: matchingUser.id,
+            name: matchingUser.name,
+            score: matchingUser.score,
+            idToken: authRes.data.idToken
+        };
+
+        localStorage.setItem("currentUser", JSON.stringify({
+            ...loggedInUser,
+            expirationDate: new Date(new Date().getTime() + authRes.data.expiresIn * 1000)
+        }));
     }
-    else {
+    catch {
         loginForm.classList.add("error");
+        removePageElements(spinner);
     }
 })
 
@@ -120,7 +210,7 @@ resetButton.addEventListener("click", () => {
 // Checking the user's result when finish button is clicked
 // If successful, awarding points based on the level
 // 3 points for level 1, 10 points for level 2, 20 points for level 3
-finishButton.addEventListener("click", () => {
+finishButton.addEventListener("click", async () => {
     const answersCorrect = interfaceCells.every((cell, index) => cell.value === targetCells[index]);
     displayPageElements(resultModal);
     resultTitle.innerText = answersCorrect ? "You won!" : "You failed";
@@ -130,9 +220,12 @@ finishButton.addEventListener("click", () => {
         score += pointsAdded;
         scoreCount.innerText = score;
 
-        // Adding the updated score to the local storage
-        scores[loggedInUser] = score;
-        localStorage.setItem("scores", JSON.stringify(scores));
+        await axios.patch(
+            `https://sudoku-6c11e.firebaseio.com/profiles/${loggedInUser.id}.json?auth=${loggedInUser.idToken}`,
+            { score }
+        );
+        loggedInUser.score = score;
+        localStorage.setItem("currentUser", JSON.stringify(loggedInUser));
     }
 })
 
